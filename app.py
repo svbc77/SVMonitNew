@@ -1,3 +1,4 @@
+import numpy as np
 import streamlit as st
 import requests
 import pandas as pd
@@ -20,9 +21,9 @@ def get_mvrv():
     # Simulazione placeholder
     df = pd.DataFrame({
         "timestamp": pd.date_range(end=pd.Timestamp.now(), periods=100),
-        "mvrv_total": pd.np.random.rand(100),
-        "sth_mvrv": pd.np.random.rand(100),
-        "lth_mvrv": pd.np.random.rand(100)
+        "mvrv_total": np.random.rand(100),
+        "sth_mvrv": np.random.rand(100),
+        "lth_mvrv": np.random.rand(100)
     })
     return df
 
@@ -31,7 +32,7 @@ def get_supply_ratio():
     # Placeholder
     df = pd.DataFrame({
         "timestamp": pd.date_range(end=pd.Timestamp.now(), periods=100),
-        "ratio": pd.np.random.rand(100)
+        "ratio": np.random.rand(100)
     })
     return df
 
@@ -39,8 +40,8 @@ def get_supply_ratio():
 def get_rsi_days_since_low():
     df = pd.DataFrame({
         "timestamp": pd.date_range(end=pd.Timestamp.now(), periods=100),
-        "rsi": pd.np.random.rand(100),
-        "days_since_low": pd.np.random.randint(1, 100, 100)
+        "rsi": np.random.rand(100),
+        "days_since_low": np.random.randint(1, 100, 100)
     })
     return df
 
