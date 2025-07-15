@@ -1,7 +1,3 @@
-dash
-pandas
-numpy
-plotly
+streamlit
 requests
-statsmodels
-gunicorn
+pandas
