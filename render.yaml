@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: svmonit-v2
+    name: svmonitnew
     env: python
     buildCommand: pip install -r requirements.txt
     startCommand: gunicorn app:server
