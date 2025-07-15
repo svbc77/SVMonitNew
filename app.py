@@ -12,14 +12,21 @@ app = dash.Dash(__name__)
 server = app.server
 
 def get_btc_price_history():
-    url = "https://api.coingecko.com/api/v3/coins/bitcoin/market_chart"
-    params = {"vs_currency": "usd", "days": "max", "interval": "daily"}
-    r = requests.get(url, params=params)
-    data = r.json()
-    df = pd.DataFrame(data["prices"], columns=["timestamp", "price"])
-    df["date"] = pd.to_datetime(df["timestamp"], unit="ms")
-    return df[["date", "price"]]
+    url = 'https://api.coingecko.com/api/v3/coins/bitcoin/market_chart'
+    params = {
+        'vs_currency': 'usd',
+        'days': '90',  # oppure 'max' per tutti i dati disponibili
+        'interval': 'daily'
+    }
+    response = requests.get(url, params=params)
+    data = response.json()
 
+    if 'prices' not in data:
+        raise ValueError(f"Unexpected response from CoinGecko: {data}")
+
+    df = pd.DataFrame(data['prices'], columns=["timestamp", "price"])
+    df['date'] = pd.to_datetime(df['timestamp'], unit='ms')
+    return df[["date", "price"]]
 def forecast_arima(series, steps=180):
     model = ARIMA(series, order=(3,1,2))
     model_fit = model.fit()
